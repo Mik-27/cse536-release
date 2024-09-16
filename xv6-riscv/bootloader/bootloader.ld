@@ -10,7 +10,7 @@ SECTIONS
 
   /* Task lay out the sections as mentioned in the handout */
   .text : {
-    _entry = .
+    _entry = .;
     *(.text)
     ecode = .;
   }
