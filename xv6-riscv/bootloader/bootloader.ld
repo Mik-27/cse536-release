@@ -9,22 +9,22 @@ SECTIONS
   . = 0x800000000;
 
   /* Task lay out the sections as mentioned in the handout */
-  .text: {
+  .text : {
     *(.text)
     ecode = .;
   }
 
-  .data: {
+  .data : {
     *(.data)
     edata = .;
   }
 
-  .rodata: {
+  .rodata : {
     *(.rodata)
     erodata = .;
   }
 
-  .bss: {
+  .bss : {
     *(.bss)
     ebss = .;
   }
