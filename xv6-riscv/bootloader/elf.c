@@ -18,7 +18,7 @@ uint64 find_kernel_load_addr(enum kernel ktype) {
     uint64 ph_size = kernel_elfhdr->ehsize;
 
     kernel_phdr = (struct proghdr*)(RAMDISK + ph_offset + ph_size);
-    return 0;
+    return kernel_phdr->vaddr;
 }
 
 uint64 find_kernel_size(enum kernel ktype) {
