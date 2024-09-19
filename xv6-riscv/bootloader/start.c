@@ -111,8 +111,12 @@ void start()
   // }
   
   /* CSE 536: Load the NORMAL kernel binary (assuming secure boot passed). */
+  struct buf mem_buf;
+  
   uint64 kernel_load_addr       = find_kernel_load_addr(NORMAL);
-  printf("%llu\n", kernel_load_addr);
+  mem_buf.data = kernel_load_addr;
+  
+  kernel_copy(NORMAL, &mem_buf);
   // uint64 kernel_binary_size     = find_kernel_size(NORMAL);     
   // uint64 kernel_entry           = find_kernel_entry_addr(NORMAL);
   
