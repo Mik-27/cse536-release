@@ -111,7 +111,7 @@ void start()
   // }
   
   /* CSE 536: Load the NORMAL kernel binary (assuming secure boot passed). */
-  // uint64 kernel_load_addr       = find_kernel_load_addr(NORMAL);
+  uint64 kernel_load_addr       = find_kernel_load_addr(NORMAL);
   // uint64 kernel_binary_size     = find_kernel_size(NORMAL);     
   uint64 kernel_entry           = find_kernel_entry_addr(NORMAL);
   
