@@ -121,6 +121,7 @@ void start()
   
   /* CSE 536: Write the correct kernel entry point */
   w_mepc((uint64) kernel_entry);
+  asm volatile("mret");
  
  out:
   /* CSE 536: Provide system information to the kernel. */
