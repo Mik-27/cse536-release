@@ -125,7 +125,7 @@ void start()
  
  out:
   /* CSE 536: Provide system information to the kernel. */
-  sys_info_ptr = (struct sys_info*) SYSINFOADDR;
+  sys_info_ptr = (struct sys_info*)0x80080000;
 
   /* CSE 536: Send the observed hash value to the kernel (using sys_info_ptr) */
 
