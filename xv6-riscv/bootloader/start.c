@@ -112,8 +112,9 @@ void start()
   
   /* CSE 536: Load the NORMAL kernel binary (assuming secure boot passed). */
   uint64 kernel_load_addr       = find_kernel_load_addr(NORMAL);
+  printf("%llu\n", kernel_load_addr);
   // uint64 kernel_binary_size     = find_kernel_size(NORMAL);     
-  uint64 kernel_entry           = find_kernel_entry_addr(NORMAL);
+  // uint64 kernel_entry           = find_kernel_entry_addr(NORMAL);
   
   /* CSE 536: Write the correct kernel entry point */
   w_mepc((uint64) kernel_entry);
