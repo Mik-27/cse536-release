@@ -115,6 +115,7 @@ void start()
   
   uint64 kernel_load_addr       = find_kernel_load_addr(NORMAL);
   mem_buf = (struct buf*) kernel_load_addr;
+  kernel_copy(NORMAL, mem_buf);
   // uint64 kernel_binary_size     = find_kernel_size(NORMAL);     
   uint64 kernel_entry           = find_kernel_entry_addr(NORMAL);
   
