@@ -93,8 +93,9 @@ void start()
 
   /* CSE 536: With kernelpmp1, isolate upper 10MBs using TOR */ 
   #if defined(KERNELPMP1)
-    w_pmpaddr0(0x0ull);
-    w_pmpcfg0(0x0);
+    w_pmpaddr0(0x80000000 >> 2);
+    w_pmpaddr1(0x88000000 >> 2);
+    w_pmpcfg0(0xb);
   #endif
 
   /* CSE 536: With kernelpmp2, isolate 118-120 MB and 122-126 MB using NAPOT */ 
