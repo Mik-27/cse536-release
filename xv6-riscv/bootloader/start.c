@@ -45,25 +45,25 @@ void setup_recovery_kernel(void) {
 }
 
 /* CSE 536: Function verifies if NORMAL kernel is expected or tampered. */
-bool is_secure_boot(void) {
-  bool verification = true;
+// bool is_secure_boot(void) {
+//   bool verification = true;
 
-  /* Read the binary and update the observed measurement 
-   * (simplified template provided below) */
-  sha256_init(&sha256_ctx);
-  struct buf b;
-  sha256_update(&sha256_ctx, (const unsigned char*) b.data, BSIZE);
-  sha256_final(&sha256_ctx, sys_info_ptr->observed_kernel_measurement);
+//   /* Read the binary and update the observed measurement 
+//    * (simplified template provided below) */
+//   sha256_init(&sha256_ctx);
+//   struct buf b;
+//   sha256_update(&sha256_ctx, (const unsigned char*) b.data, BSIZE);
+//   sha256_final(&sha256_ctx, sys_info_ptr->observed_kernel_measurement);
 
-  /* Three more tasks required below: 
-   *  1. Compare observed measurement with expected hash
-   *  2. Setup the recovery kernel if comparison fails
-   *  3. Copy expected kernel hash to the system information table */
-  if (!verification)
-    setup_recovery_kernel();
+//   /* Three more tasks required below: 
+//    *  1. Compare observed measurement with expected hash
+//    *  2. Setup the recovery kernel if comparison fails
+//    *  3. Copy expected kernel hash to the system information table */
+//   if (!verification)
+//     setup_recovery_kernel();
   
-  return verification;
-}
+//   return verification;
+// }
 
 // entry.S jumps here in machine mode on stack0.
 void start()
@@ -104,11 +104,11 @@ void start()
   #endif
 
   /* CSE 536: Verify if the kernel is untampered for secure boot */
-  if (!is_secure_boot()) {
-    /* Skip loading since we should have booted into a recovery kernel 
-     * in the function is_secure_boot() */
-    goto out;
-  }
+  // if (!is_secure_boot()) {
+  //   /* Skip loading since we should have booted into a recovery kernel 
+  //    * in the function is_secure_boot() */
+  //   goto out;
+  // }
   
   /* CSE 536: Load the NORMAL kernel binary (assuming secure boot passed). */
   struct buf* mem_buf;
@@ -123,9 +123,9 @@ void start()
   w_mepc((uint64) kernel_entry);
   asm volatile("mret");
  
- out:
+ // out:
   /* CSE 536: Provide system information to the kernel. */
-  sys_info_ptr = (struct sys_info*)0x80080000;
+  // sys_info_ptr = (struct sys_info*)0x80080000;
 
   /* CSE 536: Send the observed hash value to the kernel (using sys_info_ptr) */
 
