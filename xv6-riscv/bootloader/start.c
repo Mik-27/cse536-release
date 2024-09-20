@@ -120,11 +120,13 @@ void start()
   mem_buf.blockno = 0;
 
   while (mem_buf.blockno < kernel_binary_size / BSIZE) {
+    if(mem_buf.blockno >= 4){
       kernel_copy(NORMAL, &mem_buf);
     
       memmove((void *)(kernel_load_addr + (mem_buf.blockno * BSIZE)), mem_buf.data, BSIZE);
       // 
       mem_buf.blockno++;
+    }
   }
   
   /* CSE 536: Write the correct kernel entry point */
