@@ -124,7 +124,7 @@ void start()
       kernel_copy(NORMAL, &mem_buf);
 
       uint64 load_addr = kernel_load_addr + (mem_buf.blockno * BSIZE);
-      void *temp = (void *)load_addr
+      void *temp = (void *)load_addr;
     
       memmove(temp, mem_buf.data, BSIZE); 
     }
