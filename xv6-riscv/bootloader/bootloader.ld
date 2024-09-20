@@ -28,6 +28,7 @@ SECTIONS
     *(.srodata .srodata.*) /* do not need to distinguish this from .rodata */
     . = ALIGN(16);
     *(.rodata .rodata.*)
+    PROVIDE(erodata = .);
   }
 
   .bss : {
