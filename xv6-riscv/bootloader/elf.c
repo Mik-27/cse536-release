@@ -15,7 +15,7 @@ uint64 find_kernel_load_addr(enum kernel ktype) {
     /* CSE 536: Get kernel load address from headers */
     kernel_elfhdr = (struct elfhdr*) RAMDISK;
     uint64 ph_offset = kernel_elfhdr->phoff;
-    uint64 ph_size = kernel_elfhdr->ehsize;
+    uint64 ph_size = kernel_elfhdr->phentsize;
 
     kernel_phdr = (struct proghdr*)(RAMDISK + ph_offset + ph_size);
     return kernel_phdr->vaddr;
