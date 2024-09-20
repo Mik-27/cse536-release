@@ -9,7 +9,7 @@ fi
 kernel=$1
 
 if [ "$1" == "gdb" ]; then
-    kernel=kernel1
+    kernel=kernelpmp1
     upper=`echo kernel1 | tr '[:lower:]' '[:upper:]'`
 fi
 
