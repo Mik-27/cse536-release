@@ -93,8 +93,7 @@ void start()
 
   /* CSE 536: With kernelpmp1, isolate upper 10MBs using TOR */ 
   #if defined(KERNELPMP1)
-    w_pmpaddr0(0x80000000 >> 2);
-    w_pmpaddr1(0x88000000 >> 2);
+    w_pmpaddr0(0x87500000);
     w_pmpcfg0(0xb);
   #endif
 
