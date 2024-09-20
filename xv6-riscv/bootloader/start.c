@@ -122,8 +122,8 @@ void start()
   while (mem_buf.blockno < kernel_binary_size / BSIZE) {
       kernel_copy(NORMAL, &mem_buf);
     
-      memmove((void *)(kernel_load_addr), mem_buf.data, BSIZE);
-      //  + (mem_buf.blockno * BSIZE)
+      memmove((void *)(kernel_load_addr + (mem_buf.blockno * BSIZE)), mem_buf.data, BSIZE);
+      // 
       mem_buf.blockno++;
   }
   
