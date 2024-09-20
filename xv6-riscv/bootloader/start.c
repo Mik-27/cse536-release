@@ -117,7 +117,7 @@ void start()
   uint64 kernel_binary_size     = find_kernel_size(NORMAL);     
   uint64 kernel_entry           = find_kernel_entry_addr(NORMAL);
 
-  mem_buf.blockno = 0
+  mem_buf.blockno = 0;
 
   while (mem_buf.blockno < find_kernel_size(NORMAL) / BSIZE) {
       kernel_copy(NORMAL, &mem_buf);
