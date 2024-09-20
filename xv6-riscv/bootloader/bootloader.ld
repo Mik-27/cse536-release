@@ -10,7 +10,6 @@ SECTIONS
 
   /* Task lay out the sections as mentioned in the handout */
   .text : {
-    _entry = .;
     *(.text .text.*)
     . = ALIGN(0x1000);
     PROVIDE(ecode = .);
