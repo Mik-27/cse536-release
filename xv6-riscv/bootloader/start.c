@@ -140,6 +140,8 @@ void start()
   sys_info_ptr = (struct sys_info*)0x80080000;
   sys_info_ptr->bl_start = 0x80000000;
   sys_info_ptr->bl_end = end;
+  sys_info_ptr->dr_start = 0x80000000;
+  sys_info_ptr->dr_end = PHYSTOP;
  
  // out:
   /* CSE 536: Provide system information to the kernel. */
