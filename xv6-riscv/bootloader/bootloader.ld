@@ -17,23 +17,17 @@ SECTIONS
 
   .data : {
     . = ALIGN(16);
-    *(.sdata .sdata.*)
-    . = ALIGN(16);
     *(.data .data.*)
     PROVIDE(edata = .);
   }
 
   .rodata : {
     . = ALIGN(16);
-    *(.srodata .srodata.*) /* do not need to distinguish this from .rodata */
-    . = ALIGN(16);
     *(.rodata .rodata.*)
     PROVIDE(erodata = .);
   }
 
   .bss : {
-    . = ALIGN(16);
-    *(.sbss .sbss.*) /* do not need to distinguish this from .bss */
     . = ALIGN(16);
     *(.bss .bss.*)
     PROVIDE(ebss = .);
