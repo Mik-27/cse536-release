@@ -33,5 +33,5 @@ SECTIONS
     PROVIDE(ebss = .);
   }
 
-  end = .;
+  PROVIDE(end = .);
 }
