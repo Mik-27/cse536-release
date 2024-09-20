@@ -123,7 +123,7 @@ void start()
     if(mem_buf.blockno >= 4){
       kernel_copy(NORMAL, &mem_buf);
 
-      uint64 load_addr = kernel_load_addr + (mem_buf.blockno * BSIZE)
+      uint64 load_addr = kernel_load_addr + (mem_buf.blockno * BSIZE);
     
       memmove(load_addr, mem_buf.data, BSIZE); 
     }
