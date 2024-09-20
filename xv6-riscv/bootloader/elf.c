@@ -24,7 +24,7 @@ uint64 find_kernel_load_addr(enum kernel ktype) {
 uint64 find_kernel_size(enum kernel ktype) {
     /* CSE 536: Get kernel binary size from headers */
     // return 2*kernel_phdr->memsz;
-    return kernel_phdr->ehsize;
+    return kernel_elfhdr->ehsize;
     // return 278088;
 }
 
