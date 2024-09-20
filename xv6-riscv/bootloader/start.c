@@ -12,8 +12,6 @@
 void main();
 void timerinit();
 
-extern uint64 end;
-
 /* entry.S needs one stack per CPU */
 __attribute__ ((aligned (16))) char bl_stack[STSIZE * NCPU];
 
