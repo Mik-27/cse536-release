@@ -111,13 +111,21 @@ void start()
   // }
   
   /* CSE 536: Load the NORMAL kernel binary (assuming secure boot passed). */
-  struct buf* mem_buf;
+  struct buf mem_buf;
   
   uint64 kernel_load_addr       = find_kernel_load_addr(NORMAL);
-  mem_buf = (struct buf*) (kernel_load_addr + 4096);
-  kernel_copy(NORMAL, mem_buf);
-  // uint64 kernel_binary_size     = find_kernel_size(NORMAL);     
+  uint64 kernel_binary_size     = find_kernel_size(NORMAL);     
   uint64 kernel_entry           = find_kernel_entry_addr(NORMAL);
+
+  mem_buf.blockno = 0
+
+  while (mem_buf.blockno < find_kernel_size(NORMAL) / BSIZE) {
+      kernel_copy(NORMAL, &mem_buf);
+    
+      memmove((void *)(kernel_load_addr + (mem_buf.blockno * BSIZE)), mem_buf.data, BSIZE);
+      
+      mem_buf.blockno++;
+  }
   
   /* CSE 536: Write the correct kernel entry point */
   w_mepc((uint64) kernel_entry);
