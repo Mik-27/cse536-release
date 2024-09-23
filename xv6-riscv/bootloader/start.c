@@ -98,7 +98,7 @@ void start()
 
     w_pmpaddr1(((KERNBASE + 120*1024*1024) >> 2) + ((2*1024*1024) >> 3) - 1);  // Accessible
 
-    w_pmpaddr2(((KERNBASE + 122*1024*1024) >> 2) + ((4*1024*1024) >> 3) - 1);  // Inaccessible
+    w_pmpaddr2(((KERNBASE + 122*1024*1024) >> 2) + ((4*1024*1024) >> 3));  // Inaccessible
 
     w_pmpaddr3(((KERNBASE + 126*1024*1024) >> 2) + ((2*1024*1024) >> 3) - 1);   // Accessible
     
