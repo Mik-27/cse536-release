@@ -184,6 +184,7 @@ w_mtvec(uint64 x)
 }
 
 // Physical Memory Protection
+// pmp0
 static inline void
 w_pmpcfg0(uint64 x)
 {
@@ -194,6 +195,58 @@ static inline void
 w_pmpaddr0(uint64 x)
 {
   asm volatile("csrw pmpaddr0, %0" : : "r" (x));
+}
+
+// pmp1
+static inline void
+w_pmpcfg1(uint64 x)
+{
+  asm volatile("csrw pmpcfg1, %0" : : "r" (x));
+}
+
+static inline void
+w_pmpaddr1(uint64 x)
+{
+  asm volatile("csrw pmpaddr1, %0" : : "r" (x));
+}
+
+// pmp2
+static inline void
+w_pmpcfg2(uint64 x)
+{
+  asm volatile("csrw pmpcfg2, %0" : : "r" (x));
+}
+
+static inline void
+w_pmpaddr2(uint64 x)
+{
+  asm volatile("csrw pmpaddr2, %0" : : "r" (x));
+}
+
+// pmp3
+static inline void
+w_pmpcfg3(uint64 x)
+{
+  asm volatile("csrw pmpcfg3, %0" : : "r" (x));
+}
+
+static inline void
+w_pmpaddr3(uint64 x)
+{
+  asm volatile("csrw pmpaddr3, %0" : : "r" (x));
+}
+
+// pmp4
+static inline void
+w_pmpcfg4(uint64 x)
+{
+  asm volatile("csrw pmpcfg4, %0" : : "r" (x));
+}
+
+static inline void
+w_pmpaddr4(uint64 x)
+{
+  asm volatile("csrw pmpaddr4, %0" : : "r" (x));
 }
 
 // use riscv's sv39 page table scheme.
