@@ -79,10 +79,10 @@ void start()
 
   /* CSE 536: Unless kernelpmp[1-2] booted, allow all memory 
    * regions to be accessed in S-mode. */ 
-  #if !defined(KERNELPMP1) || !defined(KERNELPMP2)
-    w_pmpaddr0(0x3fffffffffffffull);
-    w_pmpcfg0(0xf);
-  #endif
+  // #if !defined(KERNELPMP1) || !defined(KERNELPMP2)
+  //   w_pmpaddr0(0x3fffffffffffffull);
+  //   w_pmpcfg0(0xf);
+  // #endif
 
   /* CSE 536: With kernelpmp1, isolate upper 10MBs using TOR */ 
   #if defined(KERNELPMP1)
@@ -91,22 +91,22 @@ void start()
   #endif
 
   /* CSE 536: With kernelpmp2, isolate 118-120 MB and 122-126 MB using NAPOT */ 
-  #if defined(KERNELPMP2)
-    w_pmpaddr0(0x874fffff);
-    w_pmpcfg0(0x0b);
+  // #if defined(KERNELPMP2)
+  //   w_pmpaddr0(0x874fffff);
+  //   w_pmpcfg0(0x0b);
 
-    w_pmpaddr1(0x8750001f);  
-    w_pmpcfg1(0x08);
+  //   w_pmpaddr1(0x8750001f);  
+  //   w_pmpcfg1(0x08);
 
-    w_pmpaddr2(0x8790001f);  
-    w_pmpcfg2(0x08); 
+  //   w_pmpaddr2(0x8790001f);  
+  //   w_pmpcfg2(0x08); 
 
-    w_pmpaddr3(0x87b0001f);
-    w_pmpcfg3(0x08);
+  //   w_pmpaddr3(0x87b0001f);
+  //   w_pmpcfg3(0x08);
 
-    w_pmpaddr4(0x87bfffff); 
-    w_pmpcfg4(0x0b);
-  #endif
+  //   w_pmpaddr4(0x87bfffff); 
+  //   w_pmpcfg4(0x0b);
+  // #endif
 
 
   // set M Previous Privilege mode to Supervisor, for mret.
