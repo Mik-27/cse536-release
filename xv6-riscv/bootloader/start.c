@@ -94,7 +94,7 @@ void start()
   #if defined(KERNELPMP2)
     w_pmpaddr0((KERNBASE + 118*1024*1024)>>2);
 
-    w_pmpaddr1(((KERNBASE + 118*1024*1024) >> 2) + ((2*1024*1024) >> 3));  // Inaccessible
+    w_pmpaddr1(((KERNBASE + 118*1024*1024) >> 2) + ((2*1024*1024) >> 3) - 1);  // Inaccessible
 
     w_pmpaddr1(((KERNBASE + 120*1024*1024) >> 2) + ((2*1024*1024) >> 3) - 1);  // Accessible
 
