@@ -93,7 +93,17 @@ void start()
     w_pmpaddr0(0x874fffff);
     w_pmpcfg0(0x0b);
 
-    
+    w_pmpaddr1(0x0750001f);  
+    w_pmpcfg1(0x08);
+
+    w_pmpaddr2(0x0790001f);  
+    w_pmpcfg2(0x08); 
+
+    w_pmpaddr3(0x07b0001f);
+    w_pmpcfg3(0x08);
+
+    w_pmpaddr4(0x07bfffff); 
+    w_pmpcfg4(0x0b);
   #endif
 
   // set M Previous Privilege mode to Supervisor, for mret.
