@@ -100,7 +100,7 @@ void start()
 
     w_pmpaddr3(((KERNBASE + 122*1024*1024) >> 2) + ((4*1024*1024) >> 3) - 1);  // Inaccessible
 
-    w_pmpaddr4(((KERNBASE + 126*1024*1024) >> 2) + ((2*1024*1024) >> 3) - 1);   // Accessible
+    w_pmpaddr4(((KERNBASE + 126*1024*1024) >> 2) + ((2*1024*1024) >> 3));   // Accessible
     
     w_pmpcfg0(0x181f180f); // pmp3cfg + pmp2cfg + pmp1cfg + pmp0cfg
     w_pmpcfg1(0x1f);
