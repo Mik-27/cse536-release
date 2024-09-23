@@ -156,7 +156,7 @@ void start()
   sys_info_ptr->dr_start = 0x80000000;
   sys_info_ptr->dr_end = PHYSTOP;
   
-  asm volatile("mret");
+  // asm volatile("mret");
  
  // out:
   /* CSE 536: Provide system information to the kernel. */
@@ -165,14 +165,14 @@ void start()
   /* CSE 536: Send the observed hash value to the kernel (using sys_info_ptr) */
 
   // delegate all interrupts and exceptions to supervisor mode.
-  w_medeleg(0xffff);
-  w_mideleg(0xffff);
-  w_sie(r_sie() | SIE_SEIE | SIE_STIE | SIE_SSIE);
+  // w_medeleg(0xffff);
+  // w_mideleg(0xffff);
+  // w_sie(r_sie() | SIE_SEIE | SIE_STIE | SIE_SSIE);
 
-  // return address fix
-  uint64 addr = (uint64) panic;
-  asm volatile("mv ra, %0" : : "r" (addr));
+  // // return address fix
+  // uint64 addr = (uint64) panic;
+  // asm volatile("mv ra, %0" : : "r" (addr));
 
-  // switch to supervisor mode and jump to main().
-  asm volatile("mret");
+  // // switch to supervisor mode and jump to main().
+  // asm volatile("mret");
 }
