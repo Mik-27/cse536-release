@@ -90,8 +90,10 @@ void start()
 
   /* CSE 536: With kernelpmp2, isolate 118-120 MB and 122-126 MB using NAPOT */ 
   #if defined(KERNELPMP2)
-    w_pmpaddr0(0x0ull);
-    w_pmpcfg0(0x0);
+    w_pmpaddr0(0x874fffff);
+    w_pmpcfg0(0x0b);
+
+    
   #endif
 
   // set M Previous Privilege mode to Supervisor, for mret.
