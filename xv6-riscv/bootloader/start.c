@@ -75,6 +75,15 @@ void start()
   int id = r_mhartid();
   w_tp(id);
 
+  // set M Previous Privilege mode to Supervisor, for mret.
+  unsigned long x = r_mstatus();
+  x &= ~MSTATUS_MPP_MASK;
+  x |= MSTATUS_MPP_S;
+  w_mstatus(x);
+
+  // disable paging
+  w_satp(0);
+
   /* CSE 536: Unless kernelpmp[1-2] booted, allow all memory 
    * regions to be accessed in S-mode. */ 
   #if !defined(KERNELPMP1) || !defined(KERNELPMP2)
@@ -106,14 +115,6 @@ void start()
     w_pmpcfg4(0x0b);
   #endif
 
-  // set M Previous Privilege mode to Supervisor, for mret.
-  unsigned long x = r_mstatus();
-  x &= ~MSTATUS_MPP_MASK;
-  x |= MSTATUS_MPP_S;
-  w_mstatus(x);
-
-  // disable paging
-  w_satp(0);
 
   /* CSE 536: Verify if the kernel is untampered for secure boot */
   // if (!is_secure_boot()) {
