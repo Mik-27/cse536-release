@@ -94,13 +94,13 @@ void start()
   #if defined(KERNELPMP2)
     w_pmpaddr0((KERNBASE + 118*1024*1024)>>2);
 
-    w_pmpaddr1((KERNBASE + 118*1024*1024) >> 2 + (2*1024*1024) >> 3);  // Inaccessible
+    w_pmpaddr1(((KERNBASE + 118*1024*1024) >> 2) + ((2*1024*1024) >> 3));  // Inaccessible
 
-    w_pmpaddr2((KERNBASE + 120*1024*1024) >> 2 + (2*1024*1024) >> 3);  // Accessible
+    w_pmpaddr2(((KERNBASE + 120*1024*1024) >> 2) + ((2*1024*1024) >> 3));  // Accessible
 
-    w_pmpaddr3((KERNBASE + 122*1024*1024) >> 2 + (4*1024*1024) >> 3);  // Inaccessible
+    w_pmpaddr3(((KERNBASE + 122*1024*1024) >> 2) + ((4*1024*1024) >> 3));  // Inaccessible
 
-    w_pmpaddr4((KERNBASE + 126*1024*1024) >> 2 + (2*1024*1024) >> 3);   // Accessible
+    w_pmpaddr4(((KERNBASE + 126*1024*1024) >> 2) + ((2*1024*1024) >> 3));   // Accessible
     
     w_pmpcfg0(0x181f180f); // pmp3cfg + pmp2cfg + pmp1cfg + pmp0cfg
     w_pmpcfg1(0x1f);
