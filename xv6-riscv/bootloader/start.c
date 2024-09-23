@@ -173,6 +173,6 @@ void start()
   // uint64 addr = (uint64) panic;
   // asm volatile("mv ra, %0" : : "r" (addr));
 
-  // // switch to supervisor mode and jump to main().
-  // asm volatile("mret");
+  // switch to supervisor mode and jump to main().
+  asm volatile("mret");
 }
