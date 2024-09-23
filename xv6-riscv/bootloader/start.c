@@ -92,20 +92,20 @@ void start()
 
   /* CSE 536: With kernelpmp2, isolate 118-120 MB and 122-126 MB using NAPOT */ 
   #if defined(KERNELPMP2)
-    w_pmpaddr0(0x874fffff);
-    w_pmpcfg0(0x0b);
+    w_pmpaddr0((KERNBASE + 117*1024*1024)>>2);
+    w_pmpcfg0(0xf);
 
-    w_pmpaddr1(0x8750001f);  
+    w_pmpaddr1((KERNBASE + 117*1024*1024 + 2*1024*1024) >> 2);  
     w_pmpcfg1(0x08);
 
-    w_pmpaddr2(0x8790001f);  
+    w_pmpaddr2((KERNBASE + 117*1024*1024 + 4*1024*1024) >> 2);  
     w_pmpcfg2(0x08); 
 
-    w_pmpaddr3(0x87b0001f);
+    w_pmpaddr3((KERNBASE + 117*1024*1024 + 6*1024*1024) >> 2);
     w_pmpcfg3(0x08);
 
-    w_pmpaddr4(0x87bfffff); 
-    w_pmpcfg4(0x0b);
+    w_pmpaddr4((KERNBASE + 117*1024*1024 + 8*1024*1024) >> 2); 
+    w_pmpcfg4(0x08);
   #endif
 
 
