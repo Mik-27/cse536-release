@@ -45,25 +45,40 @@ void setup_recovery_kernel(void) {
 }
 
 /* CSE 536: Function verifies if NORMAL kernel is expected or tampered. */
-// bool is_secure_boot(void) {
-//   bool verification = true;
+bool is_secure_boot(void) {
+  bool verification = true;
 
-//   /* Read the binary and update the observed measurement 
-//    * (simplified template provided below) */
-//   sha256_init(&sha256_ctx);
-//   struct buf b;
-//   sha256_update(&sha256_ctx, (const unsigned char*) b.data, BSIZE);
-//   sha256_final(&sha256_ctx, sys_info_ptr->observed_kernel_measurement);
+  /* Read the binary and update the observed measurement 
+   * (simplified template provided below) */
+  sha256_init(&sha256_ctx);
 
-//   /* Three more tasks required below: 
-//    *  1. Compare observed measurement with expected hash
-//    *  2. Setup the recovery kernel if comparison fails
-//    *  3. Copy expected kernel hash to the system information table */
-//   if (!verification)
-//     setup_recovery_kernel();
+  char* kernel_binary_ptr = (char*) RAMDISK; 
+
+  uint64 kernel_size = find_kernel_size(NORMAL); 
   
-//   return verification;
-// }
+  struct buf b;
+
+  while (kernel_size > 0) {
+    b.blockno = kernel_binary_ptr;
+    sha256_update(&sha256_ctx, (const unsigned char*)b.data, BSIZE);
+
+    kernel_size -= BSIZE;
+    kernel_binary_ptr += BSIZE;
+  }
+  // sha256_update(&sha256_ctx, (const unsigned char*) b.data, BSIZE);
+  sha256_final(&sha256_ctx, sys_info_ptr->observed_kernel_measurement);
+
+  /* Three more tasks required below: 
+   *  1. Compare observed measurement with expected hash
+   *  2. Setup the recovery kernel if comparison fails
+   *  3. Copy expected kernel hash to the system information table */
+  verification = memcmp(sys_info_ptr->observed_kernel_hash, sys_info_ptr->trusted_kernel_hash, 32) != 0? false: true
+  
+  if (!verification)
+    setup_recovery_kernel();
+  
+  return verification;
+}
 
 // entry.S jumps here in machine mode on stack0.
 void start()
