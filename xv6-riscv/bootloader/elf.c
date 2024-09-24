@@ -35,10 +35,22 @@ uint64 find_kernel_size(enum kernel ktype) {
     // return 2*kernel_phdr->memsz;
     // return kernel_elfhdr->ehsize;
     // return 278088;
+    if(ktype == NORMAL){
+        kernel_elfhdr = (struct elfhdr*) RAMDISK;
+    }
+    else {
+        kernel_elfhdr = (struct elfhdr*) RECOVERYDISK;
+    }
     return kernel_elfhdr->shoff + (kernel_elfhdr->shentsize)*(kernel_elfhdr->shnum);
 }
 
 uint64 find_kernel_entry_addr(enum kernel ktype) {
     /* CSE 536: Get kernel entry point from headers */
+    if(ktype == NORMAL){
+        kernel_elfhdr = (struct elfhdr*) RAMDISK;
+    }
+    else {
+        kernel_elfhdr = (struct elfhdr*) RECOVERYDISK;
+    }
     return kernel_elfhdr->entry;
 }
