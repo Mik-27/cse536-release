@@ -54,7 +54,7 @@ bool is_secure_boot(void) {
 
   // uint64 kernel_binary_ptr = ; 
 
-  uint64 kernel_size = find_kernel_size(NORMAL); 
+  // uint64 kernel_size = find_kernel_size(NORMAL); 
   
   struct buf b;
 
@@ -65,8 +65,8 @@ bool is_secure_boot(void) {
   //   kernel_size -= BSIZE;
   //   kernel_binary_ptr += BSIZE;
   // }
-  // // sha256_update(&sha256_ctx, (const unsigned char*) b.data, BSIZE);
-  // sha256_final(&sha256_ctx, sys_info_ptr->observed_kernel_measurement);
+  sha256_update(&sha256_ctx, (const unsigned char*) b.data, BSIZE);
+  sha256_final(&sha256_ctx, sys_info_ptr->observed_kernel_measurement);
 
   /* Three more tasks required below: 
    *  1. Compare observed measurement with expected hash
