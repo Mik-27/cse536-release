@@ -51,7 +51,7 @@ void setup_recovery_kernel(void) {
   
   while (mem_buf.blockno < kernel_binary_size / BSIZE) {
     if(mem_buf.blockno >= 4){
-      kernel_copy(NORMAL, &mem_buf);
+      kernel_copy(RECOVERY, &mem_buf);
 
       uint64 load_addr = kernel_load_addr + ((mem_buf.blockno - 4) * BSIZE);
       void *temp = (void *)load_addr;
