@@ -43,7 +43,7 @@ void panic(char *s)
  * when hash verification fails. */
 void setup_recovery_kernel(void) {
   uint64 kernel_load_addr       = find_kernel_load_addr(RECOVERY);
-  uint64 kernel_binary_size     = find_kernel_size(RECOVERY);     
+  uint64 kernel_binary_size     = find_kernel_size(RECOVERY);    
   uint64 kernel_entry           = find_kernel_entry_addr(RECOVERY);
 
   struct buf mem_buf;
@@ -67,12 +67,13 @@ void setup_recovery_kernel(void) {
 /* CSE 536: Function verifies if NORMAL kernel is expected or tampered. */
 bool is_secure_boot(void) {
   bool verification = true;
-
+  uint64 kernel_bsize     = find_kernel_size(NORMAL);    
+  
   /* Read the binary and update the observed measurement 
    * (simplified template provided below) */
   sha256_init(&sha256_ctx);
   // struct buf b;
-  sha256_update(&sha256_ctx, (const unsigned char*) RAMDISK, BSIZE);
+  sha256_update(&sha256_ctx, (const unsigned char*) RAMDISK, kernel_bsize);
   sha256_final(&sha256_ctx, sys_info_ptr->observed_kernel_measurement);
 
   /* Three more tasks required below: 
