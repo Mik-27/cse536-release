@@ -46,8 +46,9 @@ void setup_recovery_kernel(void) {
   uint64 kernel_binary_size     = find_kernel_size(RECOVERY);     
   uint64 kernel_entry           = find_kernel_entry_addr(RECOVERY);
 
+  struct buf mem_buf;
   mem_buf.blockno = 0;
-
+  
   while (mem_buf.blockno < kernel_binary_size / BSIZE) {
     if(mem_buf.blockno >= 4){
       kernel_copy(NORMAL, &mem_buf);
@@ -59,7 +60,8 @@ void setup_recovery_kernel(void) {
     }
     mem_buf.blockno++;
   }
-  
+
+  w_mepc((uint64) kernel_entry);  
 }
 
 /* CSE 536: Function verifies if NORMAL kernel is expected or tampered. */
