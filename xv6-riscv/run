@@ -9,8 +9,8 @@ fi
 kernel=$1
 
 if [ "$1" == "gdb" ]; then
-    kernel=kernelpmp2
-    upper=`echo kernelpmp2 | tr '[:lower:]' '[:upper:]'`
+    kernel=kernel1tamper
+    upper=`echo kernel1tamper | tr '[:lower:]' '[:upper:]'`
 fi
 
 if [ "$1" == "kernel1tamper" ]; then
@@ -23,9 +23,9 @@ elif [ "$1" == "kernelpmp1tamper" ]; then
     upper=`echo kernelpmp1 | tr '[:lower:]' '[:upper:]'`
 elif [ "$1" == "kernelpmp2tamper" ]; then
     upper=`echo kernelpmp2 | tr '[:lower:]' '[:upper:]'`
-else
-    upper=`echo $1 | tr '[:lower:]' '[:upper:]'`
 fi
+#else
+#upper=`echo $1 | tr '[:lower:]' '[:upper:]'`
 
 make clean
 ./generate-measurements
