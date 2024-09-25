@@ -10,7 +10,7 @@ kernel=$1
 
 if [ "$1" == "gdb" ]; then
     kernel=kernel1tamper
-    upper=`echo kernel1tamper | tr '[:lower:]' '[:upper:]'`
+    upper=`echo kernel1 | tr '[:lower:]' '[:upper:]'`
 fi
 
 if [ "$1" == "kernel1tamper" ]; then
