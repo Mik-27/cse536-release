@@ -42,37 +42,50 @@ void panic(char *s)
 /* CSE 536: Boot into the RECOVERY kernel instead of NORMAL kernel
  * when hash verification fails. */
 void setup_recovery_kernel(void) {
+  uint64 kernel_load_addr       = find_kernel_load_addr(RECOVERY);
+  uint64 kernel_binary_size     = find_kernel_size(RECOVERY);     
+  uint64 kernel_entry           = find_kernel_entry_addr(RECOVERY);
+
+  mem_buf.blockno = 0;
+
+  while (mem_buf.blockno < kernel_binary_size / BSIZE) {
+    if(mem_buf.blockno >= 4){
+      kernel_copy(NORMAL, &mem_buf);
+
+      uint64 load_addr = kernel_load_addr + ((mem_buf.blockno - 4) * BSIZE);
+      void *temp = (void *)load_addr;
+    
+      memmove(temp, mem_buf.data, BSIZE); 
+    }
+    mem_buf.blockno++;
+  }
+  
 }
 
 /* CSE 536: Function verifies if NORMAL kernel is expected or tampered. */
 bool is_secure_boot(void) {
   bool verification = true;
+  uint64 kernel_binary_size     = find_kernel_size(NORMAL);
 
   /* Read the binary and update the observed measurement 
    * (simplified template provided below) */
   sha256_init(&sha256_ctx);
-
-  // uint64 kernel_binary_ptr = ; 
-
-  // uint64 kernel_size = find_kernel_size(NORMAL); 
-  
   struct buf b;
 
-  // while (kernel_size > 0) {
-  //   b.blockno = kernel_binary_ptr;
-  //   sha256_update(&sha256_ctx, (const unsigned char*)b.data, BSIZE);
-
-  //   kernel_size -= BSIZE;
-  //   kernel_binary_ptr += BSIZE;
-  // }
-  sha256_update(&sha256_ctx, (const unsigned char*) b.data, BSIZE);
+  sha256_update(&sha256_ctx, (const unsigned char*) RAMDISK, BSIZE);
   sha256_final(&sha256_ctx, sys_info_ptr->observed_kernel_measurement);
 
   /* Three more tasks required below: 
    *  1. Compare observed measurement with expected hash
    *  2. Setup the recovery kernel if comparison fails
    *  3. Copy expected kernel hash to the system information table */
-  // verification = memcmp(sys_info_ptr->observed_kernel_hash, sys_info_ptr->trusted_kernel_hash, 32) != 0? false: true;
+  
+  for(int i=0; i < 32; i++) {
+    if(sys_info_ptr->observed_kernel_measurement[i] != trusted_kernel_hash[i]) {
+      verification = false;
+    }
+    sys_info_ptr->expected_kernel_measurement[i] = trusted_kernel_hash[i];
+  }
   
   if (!verification)
     setup_recovery_kernel();
